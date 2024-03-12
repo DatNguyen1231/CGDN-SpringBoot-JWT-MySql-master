@@ -14,11 +14,16 @@ public class ProductController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addProduct(@RequestBody Product productMoto){
-        return productService.put(productMoto);
+        return productService.add(productMoto);
     }
 
     @GetMapping("/getall")
     public ResponseEntity<?> getAllProductCar(){
         return productService.get();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        return productService.delete(id);
     }
 }

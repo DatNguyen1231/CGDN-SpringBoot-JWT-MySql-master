@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.demo.entity.DAOUser;
 
 
-import com.example.demo.ODT.Messenger;
+import com.example.demo.Dto.Messenger;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

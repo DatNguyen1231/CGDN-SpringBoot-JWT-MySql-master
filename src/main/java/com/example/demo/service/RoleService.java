@@ -4,5 +4,5 @@ import com.example.demo.entity.Role;
 import org.springframework.http.ResponseEntity;
 
 public interface RoleService {
-    ResponseEntity<?> put(Role role);
+    ResponseEntity<?> add(Role role);
 }

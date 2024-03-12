@@ -19,6 +19,6 @@ public class RoleController {
     @PostMapping("/add")
     ResponseEntity<?> addRole(@RequestBody Role role){
 
-        return roleService.put(role);
+        return roleService.add(role);
     }
 }

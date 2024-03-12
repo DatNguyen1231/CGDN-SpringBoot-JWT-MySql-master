@@ -5,9 +5,7 @@ import com.example.demo.service.TypeProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/admin/typeCar")
 @Controller
@@ -20,6 +18,11 @@ public class TypeProductController {
     @PostMapping("/add")
 
     public ResponseEntity<?> addTypeProduct(@RequestBody TypeProduct typeProduct){
-        return typeProductService.put(typeProduct);
+        return typeProductService.add(typeProduct);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable long id) {
+        return typeProductService.delete(id);
     }
 }

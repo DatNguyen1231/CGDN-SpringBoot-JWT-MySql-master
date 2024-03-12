@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.ODT.Messenger;
+import com.example.demo.Dto.JwtRequest;
+import com.example.demo.Dto.JwtResponse;
+import com.example.demo.Dto.Messenger;
 import com.example.demo.config.JwtTokenUtil;
 import com.example.demo.entity.DAOUser;
-import com.example.demo.ODT.JwtRequest;
-import com.example.demo.ODT.JwtResponse;
-import com.example.demo.service.JwtUserDetailsService;
+import com.example.demo.service.serviceImpl.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,7 +48,7 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        try{
+        try {
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
             final UserDetails userDetails = userDetailsService
@@ -58,11 +57,11 @@ public class JwtAuthenticationController {
             final String token = jwtTokenUtil.generateToken(userDetails);
 
 
-            String role =userDetailsService.getRole(authenticationRequest.getUsername());
-            return ResponseEntity.ok(new JwtResponse(token,role));
-        }catch (Exception e) {
+            String role = userDetailsService.getRole(authenticationRequest.getUsername());
+            return ResponseEntity.ok(new JwtResponse(token, role));
+        } catch (Exception e) {
             messenger.setMessenger("wrong password or account");
-        return new ResponseEntity<>(messenger, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(messenger, HttpStatus.UNAUTHORIZED);
         }
 
     }

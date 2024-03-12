@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 public interface ProductService {
 
-    ResponseEntity<?> put(Product productMoto);
+    ResponseEntity<?> add(Product productMoto);
     ResponseEntity<?> get();
+
+    ResponseEntity<?> delete(long id);
 }
