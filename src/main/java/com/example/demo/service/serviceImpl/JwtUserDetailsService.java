@@ -66,6 +66,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         return  userRepository.findByUsername(username).getRole().getRole();
     }
+
     public ResponseEntity<?>  save(DAOUser user) {
 
         if (userRepository.findByUsername(user.getUsername()) != null) {

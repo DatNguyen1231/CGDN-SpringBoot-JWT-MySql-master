@@ -19,16 +19,21 @@ public class Product {
     private long price;
     private long quantity;
 
-    private int  discount;
+    private int sale;
+    private int discount;
 
     @ManyToOne
     @JoinColumn(name = "id_TypeCar", nullable = false)
     TypeProduct typeProduct;
 
+    @ManyToOne
+    @JoinColumn(name = "id_DescribeProduct", nullable = false)
+    private DescribeProduct describeProduct;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "productMoto_id")
     //  @JsonIgnoreProperties({"id"})
     @Lob
     private List<Img> images = new ArrayList<>();
+
 }

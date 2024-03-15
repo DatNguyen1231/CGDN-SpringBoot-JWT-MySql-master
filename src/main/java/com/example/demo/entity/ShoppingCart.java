@@ -21,4 +21,9 @@ public class ShoppingCart {
     @ManyToOne
     @JoinColumn(name = "id_Product", nullable = false)
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "id_StatusShoppingCart", nullable = false)
+    private StatusShoppingCart StatusShoppingCart;
+
 }

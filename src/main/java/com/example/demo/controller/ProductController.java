@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Dto.ProductDto;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addProduct(@RequestBody Product productMoto){
-        return productService.add(productMoto);
+    public ResponseEntity<?> addProduct(@RequestBody ProductDto productDto){
+        return productService.add(productDto);
     }
 
     @GetMapping("/getall")

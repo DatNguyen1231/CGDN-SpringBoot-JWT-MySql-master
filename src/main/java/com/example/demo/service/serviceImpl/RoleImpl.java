@@ -20,11 +20,11 @@ public class RoleImpl implements RoleService {
 
         // Kiểm tra xem TypeProductCar với cùng một tên đã tồn tại chưa
         if ( roleRepository.findByRole(role.getRole()) != null ) {
-            messenger.setMessenger("Role with the same name already exists.");
+            messenger.setMessenger("Role already exists.");
             return new ResponseEntity<>(messenger, HttpStatus.CONFLICT);
         }
         roleRepository.save(role);
-        messenger.setMessenger(" add Role successf.");
+        messenger.setMessenger(" add Role successfully.");
 
         return new ResponseEntity<>(messenger, HttpStatus.OK);
     }
