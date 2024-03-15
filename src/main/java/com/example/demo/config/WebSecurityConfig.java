@@ -54,8 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
+              //  .cors().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate", "/register","/admin/role/add").permitAll().
+                .authorizeRequests().antMatchers("/authenticate", "/register","/admin/role/add","/swagger-ui.html/**","/**").permitAll().
                  antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER").
                 // all other requests need to be authenticated

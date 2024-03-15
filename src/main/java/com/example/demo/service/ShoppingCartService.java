@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.Dto.ShoppingCartDto;
+import com.example.demo.model.Dto.ShoppingCartDto;
 import org.springframework.http.ResponseEntity;
 
 public interface ShoppingCartService {

@@ -1,7 +1,7 @@
 package com.example.demo.service.serviceImpl;
 
-import com.example.demo.Dto.Messenger;
-import com.example.demo.entity.TypeProduct;
+import com.example.demo.model.Dto.Messenger;
+import com.example.demo.model.entity.TypeProduct;
 import com.example.demo.repositories.TypeProducRepository;
 import com.example.demo.service.TypeProductService;
 import org.springframework.beans.factory.annotation.Autowired;

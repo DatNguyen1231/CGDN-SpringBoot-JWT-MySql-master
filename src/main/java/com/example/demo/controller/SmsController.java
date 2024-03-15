@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Dto.sms;
+import com.example.demo.model.Dto.sms;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;

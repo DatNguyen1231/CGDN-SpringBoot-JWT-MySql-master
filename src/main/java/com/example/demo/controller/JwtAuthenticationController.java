@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.Dto.JwtRequest;
-import com.example.demo.Dto.JwtResponse;
-import com.example.demo.Dto.Messenger;
+import com.example.demo.model.Dto.JwtRequest;
+import com.example.demo.model.Dto.JwtResponse;
+import com.example.demo.model.Dto.Messenger;
 import com.example.demo.config.JwtTokenUtil;
-import com.example.demo.entity.DAOUser;
+import com.example.demo.model.entity.DAOUser;
 import com.example.demo.service.serviceImpl.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

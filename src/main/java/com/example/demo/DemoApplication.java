@@ -1,9 +1,11 @@
 package com.example.demo;
 
-import com.example.demo.entity.Role;
-import com.example.demo.entity.TypeProduct;
-import com.example.demo.repositories.RoleRepository;
-import com.example.demo.repositories.TypeProducRepository;
+//import com.example.demo.entity.*;
+
+import com.example.demo.model.entity.Role;
+import com.example.demo.model.entity.ShoppingCartDetail;
+import com.example.demo.model.entity.TypeProduct;
+import com.example.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +19,10 @@ public class DemoApplication {
 
     @Autowired
     TypeProducRepository typeProductRepository;
+    @Autowired
+    StatusShoppingCartRepository statusRepository;
+    @Autowired
+    ProductRepository repository;
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
@@ -26,22 +32,36 @@ public class DemoApplication {
     //thêm 1 lần r tắt
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationReady() {
-//        AddRole("ADMIN");
-//        AddRole("USER");
-//       System.out.println("Đã thêm role ");
-//
-//        addType("Xe rong ");
-//        addType("Xe phuong ");
-//        System.out.println("Đã thêm type product ");
+
+   //phải thêm dầu tiên người dùng k tự thêm được
+        System.out.println("hihi");
+        AddRole("ADMIN");
+        AddRole("USER");
+       System.out.println("Đã thêm role ");
+
+
+        //trường này người dùng tự thêm
+        addType("xe may1 ");
+        addType("Phu 1 ");
+        addType("PhỤ Kiện1 ");
+        System.out.println("Đã thêm type product ");
+
+
+
+
     }
-    private void addType(String type){
-        TypeProduct typeProduct=new TypeProduct();
+
+    private void addType(String type) {
+        TypeProduct typeProduct = new TypeProduct();
         typeProduct.setNameType(type);
         typeProductRepository.save(typeProduct);
     }
-    private void AddRole(String role){
-        Role addRole =new Role();
+
+    private void AddRole(String role) {
+        Role addRole = new Role();
         addRole.setRole(role);
         roleRepository.save(addRole);
     }
+
+
 }

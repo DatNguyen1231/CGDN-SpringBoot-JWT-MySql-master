@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.model.entity;
 
 import lombok.Data;
 
@@ -13,4 +13,6 @@ public class TypeProduct {
     private Long id;
     @Column(nullable = false, unique = true)
     private String nameType;
+
+
 }

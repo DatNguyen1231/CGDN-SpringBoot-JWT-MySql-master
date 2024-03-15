@@ -3,10 +3,10 @@ package com.example.demo.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.entity.DAOUser;
+import com.example.demo.model.entity.DAOUser;
 
 
-import com.example.demo.Dto.Messenger;
+import com.example.demo.model.Dto.Messenger;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +66,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         return  userRepository.findByUsername(username).getRole().getRole();
     }
+
     public ResponseEntity<?>  save(DAOUser user) {
 
         if (userRepository.findByUsername(user.getUsername()) != null) {

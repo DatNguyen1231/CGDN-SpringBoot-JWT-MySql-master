@@ -1,7 +1,6 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entity.Img;
-import com.example.demo.entity.ShoppingCart;
+import com.example.demo.model.entity.ShoppingCart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
