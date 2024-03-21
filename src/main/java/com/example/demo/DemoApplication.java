@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
+import java.util.List;
+
 @SpringBootApplication
 public class DemoApplication {
     @Autowired
@@ -33,18 +35,18 @@ public class DemoApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationReady() {
 
-   //phải thêm dầu tiên người dùng k tự thêm được
-        System.out.println("hihi");
-        AddRole("ADMIN");
-        AddRole("USER");
-       System.out.println("Đã thêm role ");
-
-
-        //trường này người dùng tự thêm
-        addType("xe may1 ");
-        addType("Phu 1 ");
-        addType("PhỤ Kiện1 ");
-        System.out.println("Đã thêm type product ");
+//   //phải thêm dầu tiên người dùng k tự thêm được
+//        System.out.println("hihi");
+//        AddRole("ADMIN");
+//        AddRole("USER");
+//       System.out.println("Đã thêm role ");
+//
+//
+//        //trường này người dùng tự thêm
+//        addType("xe may1 ");
+//        addType("Phu 1 ");
+//        addType("PhỤ Kiện1 ");
+//        System.out.println("Đã thêm type product ");
 
 
 
@@ -56,12 +58,9 @@ public class DemoApplication {
         typeProduct.setNameType(type);
         typeProductRepository.save(typeProduct);
     }
-
-    private void AddRole(String role) {
-        Role addRole = new Role();
+    private void AddRole(String role){
+        Role addRole =new Role();
         addRole.setRole(role);
         roleRepository.save(addRole);
     }
-
-
 }

@@ -13,8 +13,8 @@ public class Reviews {
     private Long id;
 
 
-    private int Rating;
-    private String Comment;
+    private int rating;
+    private String comment;
     private String dateReview;
 
     @ManyToOne

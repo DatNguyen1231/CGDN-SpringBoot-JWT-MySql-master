@@ -9,7 +9,7 @@ public class ReviewsDto {
     private Long id;
     private Long id_product;
     private Long id_user;
-    private int Rating;
-    private String Comment;
+    private int rating;
+    private String comment;
     private String dateReview;
 }
