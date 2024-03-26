@@ -4,6 +4,7 @@ import com.example.demo.model.Dto.JwtRequest;
 import com.example.demo.model.Dto.JwtResponse;
 import com.example.demo.model.Dto.Messenger;
 import com.example.demo.config.JwtTokenUtil;
+import com.example.demo.model.Dto.UserRequestDto;
 import com.example.demo.model.entity.DAOUser;
 import com.example.demo.service.serviceImpl.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class JwtAuthenticationController {
     private Messenger messenger;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody DAOUser user) throws Exception {
+    public ResponseEntity<?> saveUser(@RequestBody UserRequestDto user) throws Exception {
         return userDetailsService.save(user);
     }
 

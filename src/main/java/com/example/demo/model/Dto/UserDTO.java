@@ -3,8 +3,11 @@ package com.example.demo.model.Dto;
 import com.example.demo.model.entity.DAOUser;
 import com.example.demo.model.entity.Role;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class UserDTO {
 
     private Long id;
@@ -13,7 +16,7 @@ public class UserDTO {
     private String email;
     private String phoneNumber;
     private String address;
-    private Role role;
+
 
 
     UserDTO(DAOUser user){
@@ -23,6 +26,6 @@ public class UserDTO {
         this. email=user.getEmail();
         this. phoneNumber=user.getPhoneNumber();
         this. address=user.getAddress();
-        this. role=user.getRole();
+        
     }
 }

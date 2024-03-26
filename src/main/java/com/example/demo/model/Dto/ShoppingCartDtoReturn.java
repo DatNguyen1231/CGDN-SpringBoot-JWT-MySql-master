@@ -4,11 +4,14 @@ import com.example.demo.model.entity.Product;
 import com.example.demo.model.entity.ShoppingCart;
 import com.example.demo.model.entity.ShoppingCartDetail;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class ShoppingCartDtoReturn {
     private long idCart;
     private String dateCreated;

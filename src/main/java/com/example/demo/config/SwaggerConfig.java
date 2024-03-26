@@ -19,8 +19,6 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig   {
-
-
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -31,7 +29,6 @@ public class SwaggerConfig   {
                 .build()
                 .apiInfo(apiInfo());
     }
-
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("My Awesome API")
@@ -39,7 +36,5 @@ public class SwaggerConfig   {
                 .version("1.0")
                 .build();
     }
-
-
 
 }

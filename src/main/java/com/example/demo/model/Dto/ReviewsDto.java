@@ -2,8 +2,11 @@ package com.example.demo.model.Dto;
 
 import com.example.demo.model.entity.Product;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ReviewsDto {
 
     private Long id;

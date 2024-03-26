@@ -1,4 +1,6 @@
 package com.example.demo.model.entity;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -12,22 +14,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "Product")
-@Data
+@Getter
+@Setter
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-    private long price;
+    private float price;
     private long quantity;
-
-    private int Discount;
-
+    private float Discount;
     // 1:HonDa 2:Ducati 3:Yamaha 4:kawasaki 5:đầu nhớt & Hóa chất 6:phụ kiện xe
     private int detailType;
-
     @ManyToOne
     @JoinColumn(name = "id_TypeCar", nullable = false)
     private TypeProduct typeProduct;

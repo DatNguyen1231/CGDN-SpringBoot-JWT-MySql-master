@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 public interface ProductService {
 
     ResponseEntity<?> add(ProductDto dto);
-    ResponseEntity<?> get(int page,int size);
+    ResponseEntity<?> getAll(int page, int size);
 
+    ResponseEntity<?> getSome(int page, int size);
     ResponseEntity<?> delete(long id);
 
     ResponseEntity<?> put(long id,ProductDto productDto);

@@ -1,8 +1,6 @@
 package com.example.demo.service.serviceImpl;
 
-import com.example.demo.model.Dto.Messenger;
-import com.example.demo.model.Dto.ProductDto;
-import com.example.demo.model.Dto.ProductPageDTO;
+import com.example.demo.model.Dto.*;
 import com.example.demo.model.entity.Product;
 
 import com.example.demo.repositories.ProductRepository;
@@ -15,6 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ProductImpl implements ProductService {
     @Autowired
@@ -55,7 +57,7 @@ public class ProductImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<?> get(int page,int size) {
+    public ResponseEntity<?> getAll(int page,int size) {
         try {
             // Tạo Pageable để lấy danh sách sản phẩm trang hiện tại
             Pageable pageable = PageRequest.of(page, size);
@@ -76,6 +78,39 @@ public class ProductImpl implements ProductService {
         }
     }
 
+    @Override
+    public ResponseEntity<?> getSome(int page, int size) {
+        try {
+            //lay 1 page tu csdl
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Product> productsPage = productRepository.findAll(pageable);
+
+            //khoi tao 1 ProductSomePageReturnDTO de Response
+            ProductSomePageResponseDTO productSomePageResponseDTO = new ProductSomePageResponseDTO();
+            //set du lieu cho ProductSomePageResponseDTO
+
+            //goi ham getProductSomePageResponseDTO de lay du lieu cho setProductSomeReturns
+            productSomePageResponseDTO.setProductSomeReturns( getProductSomePageResponseDTO(productsPage) );
+
+            productSomePageResponseDTO.setPage(productsPage.getNumber());
+            productSomePageResponseDTO.setSize(productsPage.getSize());
+            productSomePageResponseDTO.setTotalElements(productsPage.getTotalElements());
+            productSomePageResponseDTO.setTotalPages(productsPage.getTotalPages());
+            return new ResponseEntity<>(productSomePageResponseDTO, HttpStatus.OK);
+
+        }catch (Exception e){  return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);}
+     //  return null;
+    }
+    //ham nay de lay vai thong tin tu product khonog lay het product
+    private static  List<ProductSomeReturnDto> getProductSomePageResponseDTO(Page<Product> productsPage) {
+        List<ProductSomeReturnDto> productSomeReturnDtos = new ArrayList<>();
+        for (Product a : productsPage){
+            ProductSomeReturnDto productSomeReturn = new ProductSomeReturnDto(a);
+            productSomeReturnDtos.add(productSomeReturn);
+        }
+        return productSomeReturnDtos;
+    }
+
     public ResponseEntity<?> getBy(String Type) {
 
 
@@ -94,7 +129,6 @@ public class ProductImpl implements ProductService {
         messenger.setMessenger("empty");
         return new ResponseEntity<>(messenger, HttpStatus.NOT_FOUND);
     }
-
     @Override
     public ResponseEntity<?> put(long id, ProductDto productDto) {
         try {

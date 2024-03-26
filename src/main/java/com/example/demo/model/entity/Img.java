@@ -1,6 +1,8 @@
     package com.example.demo.model.entity;
 
     import lombok.Data;
+    import lombok.Getter;
+    import lombok.Setter;
     import org.hibernate.annotations.Type;
 
     import javax.persistence.*;
@@ -11,7 +13,8 @@
 
     @Entity
     @Table(name = "Img")
-    @Data
+    @Getter
+    @Setter
     public class Img {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

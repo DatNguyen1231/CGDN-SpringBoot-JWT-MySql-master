@@ -16,7 +16,7 @@ public class ProductDto {
     private int detailType;
     private long idTypeProduct;
     private long idDescribeProduct;
-    private int Discount;
+    private int discount;
     private String describe;
     private List<Img> images = new ArrayList<>();
 

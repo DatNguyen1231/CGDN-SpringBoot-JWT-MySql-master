@@ -6,6 +6,8 @@ import com.example.demo.model.entity.Role;
 import com.example.demo.model.entity.ShoppingCartDetail;
 import com.example.demo.model.entity.TypeProduct;
 import com.example.demo.repositories.*;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +27,10 @@ public class DemoApplication {
     StatusShoppingCartRepository statusRepository;
     @Autowired
     ProductRepository repository;
+    //private static final Logger logger = Logger.getLogger(DemoApplication.class);
+
     public static void main(String[] args) {
+
         SpringApplication.run(DemoApplication.class, args);
     }
 
@@ -64,3 +69,4 @@ public class DemoApplication {
         roleRepository.save(addRole);
     }
 }
+///https://www.canva.com/design/DAF-gmWCTBE/vTc64g4YqCIDAqKEYmRRKg/edit

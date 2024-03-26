@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         httpSecurity.csrf().disable()
               //  .cors().disable()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate", "/register","/admin/role/add","/swagger-ui.html/**","/**").permitAll().
+                .authorizeRequests().antMatchers("/authenticate", "/register","/admin/role/add","/swagger-ui.html/**","/productcar/**").permitAll().
                  antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER").
                 // all other requests need to be authenticated

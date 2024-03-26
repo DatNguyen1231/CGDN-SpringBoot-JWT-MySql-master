@@ -63,20 +63,14 @@ public class ShoppingCartImpl implements ShoppingCartService {
         //lưu
 
     }
-
     @Override
     public ResponseEntity<?> getAll() {
-
         List<ShoppingCart> shoppingCarts = shoppingCartRepository.findAll();
-
         List<ShoppingCartDtoReturn> shoppingCartDtoReturns1 = new ArrayList<>();
-
         for (ShoppingCart a : shoppingCarts) {
             ShoppingCartDtoReturn shoppingCartDtoReturns = new ShoppingCartDtoReturn(a);
             shoppingCartDtoReturns1.add(shoppingCartDtoReturns);
         }
-
-
         return new ResponseEntity<>(shoppingCartDtoReturns1, HttpStatus.OK);
 
     }

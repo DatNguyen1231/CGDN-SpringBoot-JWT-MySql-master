@@ -3,10 +3,13 @@ package com.example.demo.service.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.model.Dto.UserRequestDto;
 import com.example.demo.model.entity.DAOUser;
 
 
 import com.example.demo.model.Dto.Messenger;
+import com.example.demo.model.entity.Role;
+import com.example.demo.repositories.RoleRepository;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
@@ -67,16 +72,37 @@ public class JwtUserDetailsService implements UserDetailsService {
         return  userRepository.findByUsername(username).getRole().getRole();
     }
 
-    public ResponseEntity<?>  save(DAOUser user) {
+    public ResponseEntity<?>  save(UserRequestDto userRequestDto) {
 
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            messenger.setMessenger("Username đã tồn tại");
+        try{
+            DAOUser daoUser = new DAOUser() ;
+
+            if (userRepository.findByUsername(userRequestDto.getUsername()) != null) {
+                messenger.setMessenger("Username đã tồn tại");
+                return  new ResponseEntity<>(messenger, HttpStatus.BAD_REQUEST);
+            }
+            daoUser.setUsername(userRequestDto.getUsername());
+
+
+            daoUser.setPassword(bcryptEncoder.encode(userRequestDto.getPassword()));
+            daoUser.setAddress(userRequestDto.getAddress());
+            daoUser.setEmail(userRequestDto.getEmail());
+            daoUser.setFullName(userRequestDto.getFullName());
+            daoUser.setPhoneNumber(userRequestDto.getPhoneNumber());
+
+            //2 mac dinh laf user
+            Role role = roleRepository.findById(2L).orElse(null);
+            daoUser.setRole(role);
+            userRepository.save(daoUser);
+            messenger.setMessenger("Tạo tài khoản thành công");
+            return  new ResponseEntity<>(messenger, HttpStatus.OK);
+        }catch (Exception e)
+        {
+            messenger.setMessenger("error cmnr :))");
             return  new ResponseEntity<>(messenger, HttpStatus.BAD_REQUEST);
         }
 
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        messenger.setMessenger("Tạo tài khoản thành công");
-        return  new ResponseEntity<>(messenger, HttpStatus.OK);
+
+
     }
 }

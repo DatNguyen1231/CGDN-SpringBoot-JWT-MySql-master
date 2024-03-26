@@ -5,6 +5,7 @@ import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 //@RequestMapping("/admin/productcar")
 @RestController
@@ -12,16 +13,20 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    //@RequestParam("productImage") MultipartFile fileProductImage
     @PostMapping("/admin/productcar/add")
-    public ResponseEntity<?> addProduct(@RequestBody ProductDto productDto){
+    public ResponseEntity<?> addProduct(@RequestBody ProductDto productDto  ){
         return productService.add(productDto);
     }
 
     @GetMapping("/productcar/getall/{page}/{size}")
-    public ResponseEntity<?> getAllProductCar(@PathVariable int page,@PathVariable int size){
-        return productService.get(page,size);
+    public ResponseEntity<?> getAllProduct(@PathVariable int page,@PathVariable int size){
+        return productService.getAll(page,size);
     }
-
+    @GetMapping("/productcar/getsome/{page}/{size}")
+    public ResponseEntity<?> getSomeProduct(@PathVariable int page,@PathVariable int size){
+        return productService.getSome(page,size);
+    }
     @DeleteMapping("/admin/productcar/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
         return productService.delete(id);
