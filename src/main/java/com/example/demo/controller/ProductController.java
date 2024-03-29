@@ -4,6 +4,7 @@ import com.example.demo.model.Dto.ProductDto;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,9 +24,9 @@ public class ProductController {
     public ResponseEntity<?> getAllProduct(@PathVariable int page,@PathVariable int size){
         return productService.getAll(page,size);
     }
-    @GetMapping("/productcar/getsome/{page}/{size}")
-    public ResponseEntity<?> getSomeProduct(@PathVariable int page,@PathVariable int size){
-        return productService.getSome(page,size);
+    @GetMapping("/productcar/getsome/{page}/{size}/{idType}")
+    public ResponseEntity<?> getSomeProduct(@PathVariable int page,@PathVariable int size,@PathVariable Long idType){
+        return productService.getSome(page,size,idType);
     }
     @DeleteMapping("/admin/productcar/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {

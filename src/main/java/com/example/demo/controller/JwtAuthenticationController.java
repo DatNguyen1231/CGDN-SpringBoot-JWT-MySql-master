@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.JwtTokenUtil;
 import com.example.demo.model.Dto.JwtRequest;
 import com.example.demo.model.Dto.JwtResponse;
 import com.example.demo.model.Dto.Messenger;
-import com.example.demo.config.JwtTokenUtil;
 import com.example.demo.model.Dto.UserRequestDto;
-import com.example.demo.model.entity.DAOUser;
 import com.example.demo.service.serviceImpl.JwtUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /*
 Expose a POST API /authenticate using the JwtAuthenticationController. The POST API gets username and password in the
 body- Using Spring Authentication Manager we authenticate the username and password.If the credentials are valid,
 a JWT token is created using the JWTTokenUtil and provided to the client.
  */
+
+@Slf4j
 @RestController
 
 
@@ -48,33 +51,9 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-
-        try {
-            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-            final UserDetails userDetails = userDetailsService
-                    .loadUserByUsername(authenticationRequest.getUsername());
-
-            final String token = jwtTokenUtil.generateToken(userDetails);
-
-
-            String role = userDetailsService.getRole(authenticationRequest.getUsername());
-            return ResponseEntity.ok(new JwtResponse(token, role));
-        } catch (Exception e) {
-            messenger.setMessenger("wrong password or account");
-            return new ResponseEntity<>(messenger, HttpStatus.UNAUTHORIZED);
-        }
-
+        return userDetailsService.login(authenticationRequest);
     }
 
 
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
-        }
-    }
+
 }

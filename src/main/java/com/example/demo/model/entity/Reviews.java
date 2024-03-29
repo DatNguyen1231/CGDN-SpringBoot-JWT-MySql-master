@@ -20,7 +20,7 @@ public class Reviews {
     private String comment;
     private String dateReview;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_Product", nullable = false)
     private Product product;
 

@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "TypeProduct")
 @Getter
 @Setter
+
 public class TypeProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,16 +16,17 @@ public class UserDTO {
     private String email;
     private String phoneNumber;
     private String address;
+    private String role;
 
 
 
-    UserDTO(DAOUser user){
+  public   UserDTO(DAOUser user){
        this.id=user.getId();
         this.username=user.getUsername();
         this. fullName=user.getFullName();
         this. email=user.getEmail();
         this. phoneNumber=user.getPhoneNumber();
         this. address=user.getAddress();
-        
+        this.role=user.getRole().getRole();
     }
 }

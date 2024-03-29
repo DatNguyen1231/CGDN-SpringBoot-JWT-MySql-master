@@ -2,6 +2,7 @@ package com.example.demo;
 
 //import com.example.demo.entity.*;
 
+import com.example.demo.model.entity.DAOUser;
 import com.example.demo.model.entity.Role;
 import com.example.demo.model.entity.ShoppingCartDetail;
 import com.example.demo.model.entity.TypeProduct;
@@ -13,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -20,7 +22,8 @@ import java.util.List;
 public class DemoApplication {
     @Autowired
     RoleRepository roleRepository;
-
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
     @Autowired
     TypeProducRepository typeProductRepository;
     @Autowired
@@ -28,7 +31,8 @@ public class DemoApplication {
     @Autowired
     ProductRepository repository;
     //private static final Logger logger = Logger.getLogger(DemoApplication.class);
-
+    @Autowired
+    UserRepository userRepository;
     public static void main(String[] args) {
 
         SpringApplication.run(DemoApplication.class, args);
@@ -47,15 +51,27 @@ public class DemoApplication {
 //       System.out.println("Đã thêm role ");
 //
 //
+//        addUserAdmin();
+//        System.out.println("đã thêm tk admin");
+
 //        //trường này người dùng tự thêm
-//        addType("xe may1 ");
-//        addType("Phu 1 ");
-//        addType("PhỤ Kiện1 ");
+//        addType("xe may");
+//        addType("Phụ tùng ");
 //        System.out.println("Đã thêm type product ");
 
 
 
 
+    }
+
+    void addUserAdmin(){
+        DAOUser user= new DAOUser();
+        user.setUsername("admin");
+        user.setPassword(bcryptEncoder.encode("admin"));
+        Role role = new Role();
+        role.setId(1L);
+        user.setRole(role);
+        userRepository.save(user);
     }
 
     private void addType(String type) {
