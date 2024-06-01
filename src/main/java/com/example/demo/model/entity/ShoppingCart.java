@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,19 +18,16 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long totalPriceCart;
-    private String dateCreated;
-
-    //1 đang chờ trong giỏ hàng user ,2 đang chờ duyêt, 3 đã duyệt , 4đã bị hủy;
+    private Date paymentDate;
+    //1 đang chờ trong giỏ hàng user 2 đã mua
     private int status;
 
     @ManyToOne
     @JoinColumn(name = "id_Users", nullable = false)
     private DAOUser user;
 
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "ShoppingCartId")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ShoppingCartId",nullable = false)
     private List<ShoppingCartDetail> shoppingCartDetails = new ArrayList<>();
 
 

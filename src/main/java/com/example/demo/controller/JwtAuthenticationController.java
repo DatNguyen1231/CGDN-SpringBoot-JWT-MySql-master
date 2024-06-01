@@ -1,59 +1,39 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.JwtTokenUtil;
+
 import com.example.demo.model.Dto.JwtRequest;
-import com.example.demo.model.Dto.JwtResponse;
-import com.example.demo.model.Dto.Messenger;
 import com.example.demo.model.Dto.UserRequestDto;
+import com.example.demo.service.CustomerService;
 import com.example.demo.service.serviceImpl.JwtUserDetailsService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-
-/*
-Expose a POST API /authenticate using the JwtAuthenticationController. The POST API gets username and password in the
-body- Using Spring Authentication Manager we authenticate the username and password.If the credentials are valid,
-a JWT token is created using the JWTTokenUtil and provided to the client.
- */
-
-@Slf4j
 @RestController
-
-
 public class JwtAuthenticationController {
+    private final JwtUserDetailsService userDetailsService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    public JwtAuthenticationController(JwtUserDetailsService userDetailsService, CustomerService customerService) {
+        this.userDetailsService = userDetailsService;
 
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-    @Autowired
-    private Messenger messenger;
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody UserRequestDto user) throws Exception {
-        return userDetailsService.save(user);
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping("/register")
+    public ResponseEntity<?> saveUser(@RequestBody UserRequestDto user) {
+        return userDetailsService.register(user);
+    }
+
+    @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         return userDetailsService.login(authenticationRequest);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/delete-by-user/{id}")
+    public ResponseEntity<?> deleteByUser(@PathVariable Long id) {
+        return userDetailsService.deleteUser(id);
+    }
 
 }

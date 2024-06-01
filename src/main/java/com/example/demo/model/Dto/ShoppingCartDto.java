@@ -11,20 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ShoppingCartDto {
-
-
-
-    private String dateCreated;
-
-    private long totalPriceCart;
-    private Long id_user;
-    private int status;
-    private List<ShoppingCartDetail> shoppingCartDetails = new ArrayList<>();
-//
-//    private UserDTO dto;
-//
-//    ShoppingCartDto(ShoppingCart cart){
-//        this.dto  = new UserDTO(cart.getUser());
-//    }
-
+    private Long idProduct;
+    private int quantityCart;
 }

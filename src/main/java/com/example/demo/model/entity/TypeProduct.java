@@ -17,6 +17,4 @@ public class TypeProduct {
     private Long id;
     @Column(nullable = false, unique = true)
     private String nameType;
-
-
 }

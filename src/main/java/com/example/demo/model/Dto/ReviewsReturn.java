@@ -10,7 +10,6 @@ import java.util.List;
 public class ReviewsReturn {
 
     List<CommentDto> comments;
-
     int quantityReviews;
     float averageRating;
 }

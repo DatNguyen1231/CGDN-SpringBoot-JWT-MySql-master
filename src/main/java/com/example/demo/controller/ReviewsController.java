@@ -1,28 +1,30 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Dto.ProductDto;
 import com.example.demo.model.Dto.ReviewsDto;
 import com.example.demo.service.ReviewsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/admin/reviews")
+@RequestMapping("/reviews")
 public class ReviewsController {
-    @Autowired
-    ReviewsService reviewsService;
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addProduct(@RequestBody ReviewsDto reviewsDto){
-        return reviewsService.add(reviewsDto);
+    private final ReviewsService reviewsService;
+
+    public ReviewsController(ReviewsService reviewsService) {
+        this.reviewsService = reviewsService;
     }
-    @GetMapping("/get/{productId}")
-    public ResponseEntity<?> get( @PathVariable long productId){
-        return reviewsService.get(productId);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/add")
+    public ResponseEntity<?> addReview(@RequestBody ReviewsDto reviewsDto) {
+        return reviewsService.addReview(reviewsDto);
+    }
 
+    @GetMapping("/get/{productId}")
+    public ResponseEntity<?> get(@PathVariable long productId) {
+        return reviewsService.getReview(productId);
     }
 }
 

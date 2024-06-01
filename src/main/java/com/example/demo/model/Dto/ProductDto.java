@@ -8,17 +8,13 @@ import java.util.List;
 
 @Data
 public class ProductDto {
-
-   // private Long id;
     private String name;
-    private long price;
+    private double price;
     private long quantity;
-    private int detailType;
+    private Long detailType;
     private long idTypeProduct;
-    private long idDescribeProduct;
     private int discount;
     private String describe;
     private List<Img> images = new ArrayList<>();
-
    
 }

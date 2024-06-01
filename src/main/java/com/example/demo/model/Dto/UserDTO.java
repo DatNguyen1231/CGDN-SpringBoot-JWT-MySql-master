@@ -16,9 +16,8 @@ public class UserDTO {
     private String email;
     private String phoneNumber;
     private String address;
+    private int status;
     private String role;
-
-
 
   public   UserDTO(DAOUser user){
        this.id=user.getId();
@@ -27,6 +26,7 @@ public class UserDTO {
         this. email=user.getEmail();
         this. phoneNumber=user.getPhoneNumber();
         this. address=user.getAddress();
+        this.status=user.getStatus();
         this.role=user.getRole().getRole();
     }
 }

@@ -17,11 +17,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private float price;
+    private double price;
     private long quantity;
     private float Discount;
-    // 1:HonDa 2:Ducati 3:Yamaha 4:kawasaki     5:đầu nhớt & Hóa chất 6:phụ kiện xe
-    private int detailType;
+    //  1:Kawasaki2:Ducati 3:Honda4:Suziki    5:đầu nhớt  6:Phanh xe 7Gương 8Bánh xe
+    private Long detailType;
     @ManyToOne
     @JoinColumn(name = "id_TypeCar", nullable = false)
     private TypeProduct typeProduct;
@@ -29,9 +29,8 @@ public class Product {
     @Column(name = "describe", columnDefinition = "TEXT")
     private String describe;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "productMoto_id")
-// @Fetch(FetchMode.SUBSELECT)
     private List<Img> images = new ArrayList<>();
 
 }

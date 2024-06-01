@@ -1,6 +1,6 @@
 package com.example.demo.model.Dto;
 
-import lombok.Data;
+import com.example.demo.model.entity.DAOUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,13 +15,10 @@ public class JwtResponse implements Serializable {
 
     private static final long serialVersionUID = -8091879091924046844L;
     private final String token;
+    private UserDTO userDTO;
 
-    public JwtResponse(String token) {
+    public JwtResponse(String token, DAOUser daoUser) {
         this.token = token;
-
+        userDTO = new UserDTO(daoUser);
     }
-
-//    public String getToken() {
-//        return this.jwttoken;
-//    }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class ProductSomePageResponseDTO {
 
-    private List<ProductSomeReturnDto> productSomeReturns;
+    private List<ProductSomeReponseDto> productSomeReponseDtos;
     private int page;
     private int size;
     private long totalElements;
