@@ -1,29 +1,22 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Dto.ProductDto;
+import com.example.demo.model.Product;
+import io.jsonwebtoken.io.IOException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import org.springframework.web.multipart.MultipartFile;
+import javax.mail.Multipart;
 import java.util.List;
-
+import javax.mail.Multipart;
+@Service
 public interface ProductService {
-    ResponseEntity<?> addProduct(ProductDto dto);
 
-    ResponseEntity<?> getByIdType(int page, int size, Long idType);
+    ResponseEntity<List<?>>  findByName(String name);
+    ResponseEntity<?>  findByID(int id);
 
-    ResponseEntity<?> getTypeDetail(int page, int size, Long detailType);
-
-    ResponseEntity<?> getDetail(Long idProduct);
-
-    ResponseEntity<?> getTypeDetailArrange(int page, int size, Long detailType, String arrange);
-
-    ResponseEntity<?> getByTypeProduct_IdArrange(int page, int size, Long typeProduct_Id, String arrange);
-
-    ResponseEntity<?> deleteProduct(long id);
-
-    ResponseEntity<?> deleteMultipleProducts(List<Long> ids);
-
-    ResponseEntity<?> putProduct(long id, ProductDto productDto);
-
-    ResponseEntity<?> findByNameProduct(int page, int size, String nameProduct);
-
+    public ResponseEntity<?> uploadProduct(Product product );
+    public        ResponseEntity<?>delete(int id);
+    public       ResponseEntity<?>put(int id,Product product);
+    ResponseEntity<List<?>> getAllProducts();
 }
